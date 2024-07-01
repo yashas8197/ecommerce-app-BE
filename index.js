@@ -19,36 +19,8 @@ app.use(cors(corsOptions));
 
 initializeDatabase();
 
-const jsonData = fs.readFileSync("products.json", "utf8");
+const jsonData = fs.readFileSync("newproducts.json", "utf8");
 const productsData = JSON.parse(jsonData);
-
-async function seedData() {
-  try {
-    for (const productData of productsData) {
-      const newProduct = new Products({
-        title: productData.title,
-        category: productData.category,
-        image: productData.image,
-        rating: productData.rating,
-        size: productData.size,
-        description: productData.description,
-        trending: productData.trending,
-        original_price: productData.original_price,
-        price: productData.price,
-        delivery_time: productData.delivery_time,
-        reviews: productData.reviews,
-        in_stock: productData.in_stock,
-      });
-
-      await newProduct.save();
-      console.log("product data", newProduct.title);
-    }
-  } catch (error) {
-    console.log("Error seeding the data", error);
-  }
-}
-
-// seedData();
 
 async function getAllProducts() {
   try {
